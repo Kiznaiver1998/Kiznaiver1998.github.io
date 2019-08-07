@@ -7,19 +7,14 @@
     error: '复制错误',
     noSupport: '浏览器不支持'
   }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="http://i2.tiimg.com/695979/85f0ddcc268be3e6.jpg"></div><div class="author-info__name text-center">Kiznaiver</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/Kiznaiver1998" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">13</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">12</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">2</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(http://i1.fuimg.com/695979/aefa8138a26b53d8.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Code Kiznaiver</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a></span></div><div id="post-info"><div id="post-title">啃underscore源码 一</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-04-14</time><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">528</span><span class="post-meta__separator">|</span><span>阅读时长: 2 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="http://i2.tiimg.com/695979/85f0ddcc268be3e6.jpg"></div><div class="author-info__name text-center">Kiznaiver</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/Kiznaiver1998" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">14</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">14</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">2</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(http://i1.fuimg.com/695979/aefa8138a26b53d8.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Code Kiznaiver</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a></span></div><div id="post-info"><div id="post-title">啃underscore源码 一</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-04-14</time><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">528</span><span class="post-meta__separator">|</span><span>阅读时长: 2 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
 <p>最近由于比赛要交了，以及工作室屯了各种项目，实在忙不过来刷题，所以很久没更blog了（良心痛），现在自己的水平还是渣代码堆砌 + 简单的增删改查（悲伤）</p>
 <p>所以痛定思痛，决定之后的任务是先补学校课堂的知识（已经很久没有好好学习了），然后业余时间选择读一些源码&amp;涉猎一些不同的应用场景（多看一点github项目）&amp;刷题</p>
 <p>所以开始了本月第一弹underscore源码解析部分</p>
 </blockquote>
-<br>
-第一行代码:
-
+<p><br><br>第一行代码:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> root = <span class="keyword">typeof</span> self == <span class="string">'object'</span> &amp;&amp; self.self === self &amp;&amp; self || </span><br><span class="line">          <span class="keyword">typeof</span> global == <span class="string">'object'</span> &amp;&amp; global.global === global &amp;&amp; global ||</span><br><span class="line">          <span class="keyword">this</span> ||</span><br><span class="line">          &#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<br>
-**问题: self是什么, self.self是什么, 有什么用?**
-
+<p><br><br><strong>问题: self是什么, self.self是什么, 有什么用?</strong></p>
 <ol>
 <li><p>首先，self即是window.self，self变量在IIFE中没有声明，所以向上寻找，访问window对象。</p>
 <p>在MDN中，知道</p>
@@ -28,13 +23,11 @@
 <li>window.self几乎总是用于下面示例那样的比较，用来判断当前 window 是不是父 frameset 中的第一个 frame。</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (window.parent.frames[0] != window.self) &#123;</span><br><span class="line">    // 当前对象不是frames列表中的第一个时</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
 <p>应用: 我们总是能看到有网站左右两边挂了一些“不可描述”的图，用F12发现，他们基本上都是有一个iframe标签包裹，这种现象有可能是网站被劫持了。所以通过window.self的判断可以判断网站是不是被劫持</p>
 </li>
 <li><p>self.self</p>
 <p>对于web页面，在默认情况下，以下4个写法都是相同的</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span> === self                  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">window</span>.window === <span class="built_in">window</span>.self    <span class="comment">// true</span></span><br><span class="line"><span class="built_in">window</span>.self === self             <span class="comment">// true</span></span><br><span class="line"><span class="built_in">window</span>.window === self           <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
 <p>通过这个判断来判断是不是浏览器环境</p>
 </li>
 </ol>
@@ -43,7 +36,6 @@
 <p>收获:</p>
 <p>1.比三目运算符更酷炫的赋值操作</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tmp = 条件<span class="number">1</span> &amp;&amp; 条件<span class="number">2</span> &amp;&amp; 条件<span class="number">3</span> &amp;&amp; 目标值</span><br></pre></td></tr></table></figure>
-
 <p>2.知道了window.self的存在</p>
 <hr>
 <p>参考网站:</p>
