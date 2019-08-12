@@ -543,6 +543,15 @@ footer {
 #footer .footer-separator {
   margin: 0 0.2rem;
 }
+#busuanzi_container_site_uv {
+  display: inline !important;
+}
+#busuanzi_container_site_pv {
+  display: inline !important;
+}
+#busuanzi_container_page_pv {
+  display: inline !important;
+}
 #busuanzi_value_site_uv,
 #busuanzi_value_site_pv,
 #busuanzi_value_page_pv {
