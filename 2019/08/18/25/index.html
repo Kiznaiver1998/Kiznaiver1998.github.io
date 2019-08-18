@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="【翻译】原生支持的懒加载已经到来！"><meta name="keywords" content="HTML"><meta name="author" content="Kiznaiver,undefined"><meta name="copyright" content="Kiznaiver"><title>【翻译】原生支持的懒加载已经到来！ | Code Kiznaiver</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是懒加载？"><span class="toc-text">什么是懒加载？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://s2.ax1x.com/2019/08/10/eLvDkq.jpg"></div><div class="author-info__name text-center">Kiznaiver</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/Kiznaiver1998" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">26</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">7</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://s2.ax1x.com/2019/08/10/eLx8b9.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Code Kiznaiver</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a></span></div><div id="post-info"><div id="post-title">【翻译】原生支持的懒加载已经到来！</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-08-18</time><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">980</span><span class="post-meta__separator">|</span><span>阅读时长: 4 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+<p>资料来源：<a href="https://medium.com/bbc-design-engineering/native-lazy-loading-has-arrived-c37a165d70a5" target="_blank" rel="noopener">https://medium.com/bbc-design-engineering/native-lazy-loading-has-arrived-c37a165d70a5</a></p>
+<p>title： Native lazy loading has arrived!</p>
+<p>author:  Andy Potts (BBC 软件工程师)</p>
+<p>date: 2019-08-12</p>
+</blockquote>
+<p>对于从未看到过<strong>原生懒加载</strong>这个术语的人：</p>
+<blockquote>
+<p>谷歌上周发布了 <a href="https://web.dev/native-lazy-loading/" target="_blank" rel="noopener">Google introduced native lazy loading to Chrome version 76</a> </p>
+</blockquote>
+<p>现在你可能会想知道：“什么是原生懒加载，它是否值得添加到我的网站上？”</p>
+<p>好的，这正是我希望为你解答的问题，因为我会谈谈我使用它的经验。</p>
+<a id="more"></a>
+<h1 id="什么是懒加载？"><a href="#什么是懒加载？" class="headerlink" title="什么是懒加载？"></a>什么是懒加载？</h1><p>懒加载是指通过在用户需要时加载资源（例如图像资源）来提高性能。举个例子，当用户访问你的网站的时候，它会在进入视图的时候（就是在用户可以看见的时候）加载当前视图所需要的图像，而不是在页面最初加载所有图像。这是很有好处的，因为用户不需要总是看在页面底部的图像，所以为什么要让我们的用户加载所有不必要的图像呢？</p>
+<p>以前，如果我们想要实现懒加载，我们必须导入一个库或编写一些 JavaScript 来检查元素相对于用户视图的位置，必要时（就是用户移动到对应位置的时候）再加载对应的资源。听起来实现起来有一点复杂，不是吗？</p>
+<p>原生懒加载是 Google 浏览器新的内置解决方案，这意味着不需要编写额外的 JavaScript 来实现懒加载（并且极大地提高了网站的性能）。原生懒加载使用起来十分简单，只需要通过添加<code>loading</code>属性到 <code>&lt;image&gt;</code>或 <code>iframe</code> 标签上就可以实现。</p>
+<p>所以，它值得添加到我们的网站上吗？是的！将<code>loading</code>属性添加到图像上会使图像在一个快速的网络连接环境上的加载时间减少约 50％ —— 从约 1 秒到 &lt;0.5 秒，以及最多可以向服务器保存 40 个请求🎊。所有这些性能增强只是将一个属性添加到一堆图像中！</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>所以，现在我们已经看到了它能够做什么，    让我们来看看它是如何工作的。我将介绍如何为图像实现原生的懒加载。</p>
+<p>这真的非常容易 —— 把<code>loading</code>属性，值为<code>lazy</code>加在<code>image</code>标签上，这就能告诉浏览器去懒加载这张图片，并且指定图片的宽高能够避免页面的重排。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;/images/example.png&quot; loading=&quot;lazy&quot; width=&quot;400&quot; height=&quot;400&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p><iframe height="400" style="width: 100%;" scrolling="no" title="Native lazy loading!" src="//codepen.io/andypotts/embed/eqLgMX/?height=265&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true"><br>总而言之，使用原生懒加载是为您的用户提供真正的渐进式性能增强的最简单方法之一。这不是一个完美的解决方案，但如果你还没有使用延迟加载并拥有大量图像/ iframe，那么它绝对值得尝试 - 特别是因为它很容易实现！<br>不幸的是，原生懒加载不是一颗银色子弹（这个比喻我很疑惑，之前看柯南剧场版也有提到，百度了一下大概是用来比喻为具有极端有效性的解决方法，作为杀手锏、最强杀招、王牌等的代称）。由于原生懒加载是一个新的浏览器功能，目前缺乏浏览器支持，因此必须用 <a href="https://segmentfault.com/a/1190000002593432" target="_blank" rel="noopener">polyfill</a> 或后备JavaScript 解决方案以支持其他浏览器。您可以在 <a href="https://caniuse.com/#feat=loading-lazy-attr" target="_blank" rel="noopener">browsers that support native lazy loading on caniuse.com</a> 查看更多的细节。（可以看到兼容性很差了，还是老老实实写 JS 判断吧 233）</iframe></p>
+<p>还值得注意的是，无法使用原生懒加载来加载背景图像，因此如果您使用了很多背景图像，那么您可能需要考虑使用 JavaScript 替代方法来实现懒加载背景图像了。</p>
+<p>Have fun lazy loading!</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Kiznaiver</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://kiznaiver1998.cn/2019/08/18/25/">http://kiznaiver1998.cn/2019/08/18/25/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://kiznaiver1998.cn" target="_blank">Code Kiznaiver</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/HTML/">HTML</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2019/08/18/24/"><span>练习——拖拽对象封装</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By Kiznaiver</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>支持 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Thanks for looking.</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv" style="display: inline !important;"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML">    </script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
